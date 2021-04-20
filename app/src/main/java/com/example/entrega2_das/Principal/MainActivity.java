@@ -1,8 +1,10 @@
-package com.example.entrega2_das;
+package com.example.entrega2_das.Principal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.entrega2_das.R;
 
 public class MainActivity extends AppCompatActivity {
 
