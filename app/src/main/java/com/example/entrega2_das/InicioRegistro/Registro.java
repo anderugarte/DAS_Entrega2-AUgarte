@@ -2,6 +2,7 @@ package com.example.entrega2_das.InicioRegistro;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -43,11 +44,14 @@ public class Registro extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Obtenemos los campos introducidos por el usuario
-                String n = nombre.getText().toString();
-                String a = apellidos.getText().toString();
-                String u = username.getText().toString();
-                String p = contrasena.getText().toString();
-                String d = mostrarC.getText().toString();
+                //String n = nombre.getText().toString();
+                //String a = apellidos.getText().toString();
+                //String u = username.getText().toString();
+                //String p = contrasena.getText().toString();
+                //String d = mostrarC.getText().toString();
+
+                Intent rf = new Intent (getBaseContext(), RegistroFoto.class);
+                startActivity(rf);
 
             }
         });

@@ -9,13 +9,13 @@
 
     <Button
         android:id="@+id/bRegis"
-        android:layout_width="223dp"
-        android:layout_height="90dp"
+        android:layout_width="185dp"
+        android:layout_height="72dp"
         android:backgroundTint="#000000"
         android:fontFamily="@font/monofett"
         android:text="¿No tienes cuenta?"
         android:textColor="#FF9800"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,7 +88,7 @@
         android:fontFamily="@font/monofett"
         android:text="Iniciar Sesión"
         android:textColor="#FF9800"
-        android:textSize="30sp"
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +108,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bRegis"
-        app:layout_constraintVertical_bias="0.433" />
+        app:layout_constraintVertical_bias="0.285" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
