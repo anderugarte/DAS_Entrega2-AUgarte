@@ -35,4 +35,11 @@
         <item name="colorAccent">@android:color/black</item>
     </style>
 
+    <!--Tema de NuevaPublicacion&MiPerfil-->
+    <style name="ThemeNPMP" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@android:color/holo_green_dark</item>
+        <item name="colorPrimaryDark">@android:color/holo_green_light</item>
+        <item name="colorAccent">@android:color/black</item>
+    </style>
+
 </resources>

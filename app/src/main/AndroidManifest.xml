@@ -4,13 +4,17 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <uses-feature android:name="android.hardware.camera2.full" android:required="true" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera2.full"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -19,20 +23,26 @@
         android:roundIcon="@mipmap/ic_wit_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Entrega2_DAS">
-        <activity android:name=".Principal.NuevaPublicacion"></activity>
-        <activity android:name=".Principal.MenuPrincipal"
-            android:theme="@style/ThemeMenuPrincipal">
-        </activity>
-        <activity android:name=".InicioRegistro.RegistroFoto"
-            android:theme="@style/ThemeRegistroFoto">
-        </activity>
-        <activity android:name=".InicioRegistro.Registro"
-            android:theme="@style/ThemeRegistro">
-        </activity>
-        <activity android:name=".InicioRegistro.InicioSesion"
-            android:theme="@style/ThemeInicioSesion">
-        </activity>
-        <activity android:name=".Principal.MainActivity"
+        <activity
+            android:name=".Principal.MiPerfil"
+            android:theme="@style/ThemeNPMP"></activity>
+        <activity
+            android:name=".Principal.NuevaPublicacion"
+            android:theme="@style/ThemeNPMP"></activity>
+        <activity
+            android:name=".Principal.MenuPrincipal"
+            android:theme="@style/ThemeMenuPrincipal"></activity>
+        <activity
+            android:name=".InicioRegistro.RegistroFoto"
+            android:theme="@style/ThemeRegistroFoto"></activity>
+        <activity
+            android:name=".InicioRegistro.Registro"
+            android:theme="@style/ThemeRegistro"></activity>
+        <activity
+            android:name=".InicioRegistro.InicioSesion"
+            android:theme="@style/ThemeInicioSesion"></activity>
+        <activity
+            android:name=".Principal.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
