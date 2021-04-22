@@ -18,6 +18,13 @@ import android.widget.ImageView;
 import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class RegistroFoto extends AppCompatActivity {
 
     ImageView fp;
@@ -36,10 +43,7 @@ public class RegistroFoto extends AppCompatActivity {
         bTF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivityForResult(takePictureIntent, 8888);
-                }
+                dispatchTakePictureIntent();
             }
         });
 
@@ -58,12 +62,11 @@ public class RegistroFoto extends AppCompatActivity {
                 if (!cambiado) {
                     // Se genera un dialogo para preguntar si el usuario esta seguro de no anadir una foto de perfil
                     AlertDialog.Builder builder = new AlertDialog.Builder(RegistroFoto.this);
-                    Configuration configuration = getBaseContext().getResources().getConfiguration();
-                    String l = configuration.getLocales().toString();
                     String txt1 = "Aceptar";
                     String txt2 = "Cancelar";
                     builder.setTitle("Añadir foto de perfil");
                     builder.setMessage("¿Está seguro de no añadir ninguna foto de perfil?");
+                    builder.setCancelable(true);
 
                     builder.setPositiveButton(txt1, new DialogInterface.OnClickListener() {
                         @Override
@@ -103,7 +106,20 @@ public class RegistroFoto extends AppCompatActivity {
         if (requestCode == 8888 && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap laminiatura = (Bitmap) extras.get("data");
-            fp.setImageBitmap(laminiatura);
+            File eldirectorio = this.getFilesDir();
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+            String nombrefichero = "IMG_" + timeStamp + "_";
+            File imagenFich = new File(eldirectorio, nombrefichero + ".jpg");
+            OutputStream os;
+            try {
+                fp.setImageBitmap(laminiatura);
+                os = new FileOutputStream(imagenFich);
+                laminiatura.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                os.flush();
+                os.close();
+            } catch (Exception e) {
+
+            }
         }
 
         // Imagen de la galeria
@@ -112,5 +128,12 @@ public class RegistroFoto extends AppCompatActivity {
             fp.setImageURI(imagenSeleccionada);
         }
         cambiado = true;
+    }
+
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, 8888);
+        }
     }
 }

@@ -4,6 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature
         android:name="android.hardware.camera2.full"
         android:required="true" />
@@ -11,24 +15,20 @@
         android:name="android.hardware.camera"
         android:required="true" />
 
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_wit"
         android:label="WIT?"
         android:roundIcon="@mipmap/ic_wit_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Entrega2_DAS">
         <activity
             android:name=".Principal.MiPerfil"
-            android:theme="@style/ThemeNPMP"></activity>
+            android:theme="@style/ThemeNPMP" />
         <activity
             android:name=".Principal.NuevaPublicacion"
-            android:theme="@style/ThemeNPMP"></activity>
+            android:theme="@style/ThemeNPMP" />
         <activity
             android:name=".Principal.MenuPrincipal"
             android:theme="@style/ThemeMenuPrincipal"></activity>
