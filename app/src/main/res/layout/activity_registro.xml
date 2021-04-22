@@ -11,11 +11,11 @@
         android:id="@+id/ptCumple"
         android:layout_width="267dp"
         android:layout_height="47dp"
+        android:clickable="true"
         android:ems="10"
+        android:focusable="false"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"
-        android:clickable="true"
-        android:focusable="false"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,48 +26,51 @@
 
     <TextView
         android:id="@+id/tvCumple"
-        android:layout_width="258dp"
+        android:layout_width="201dp"
         android:layout_height="36dp"
         android:fontFamily="@font/monofett"
+        android:gravity="left"
         android:text="Cumpleaños"
         android:textColor="#FF9800"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintHorizontal_bias="0.271"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tpContrasena"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvContrasena"
         android:layout_width="185dp"
         android:layout_height="33dp"
         android:fontFamily="@font/monofett"
+        android:gravity="left"
         android:text="Contraseña"
         android:textColor="#FF9800"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.318"
+        app:layout_constraintHorizontal_bias="0.252"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ptUsernameR"
-        app:layout_constraintVertical_bias="0.069" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvUsernameR"
-        android:layout_width="302dp"
-        android:layout_height="32dp"
+        android:layout_width="283dp"
+        android:layout_height="34dp"
         android:fontFamily="@font/monofett"
+        android:gravity="left"
         android:text="Nombre de Usuario"
         android:textColor="#FF9800"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.66"
+        app:layout_constraintHorizontal_bias="0.598"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ptApellidos"
-        app:layout_constraintVertical_bias="0.053" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/ptUsernameR"
@@ -89,15 +92,16 @@
         android:layout_width="185dp"
         android:layout_height="33dp"
         android:fontFamily="@font/monofett"
+        android:gravity="left"
         android:text="Apellidos"
         android:textColor="#FF9800"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.318"
+        app:layout_constraintHorizontal_bias="0.252"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ptNombre"
-        app:layout_constraintVertical_bias="0.035" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/ptApellidos"
@@ -112,19 +116,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvApellidos"
-        app:layout_constraintVertical_bias="0.002" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvNombre"
-        android:layout_width="137dp"
-        android:layout_height="27dp"
+        android:layout_width="134dp"
+        android:layout_height="34dp"
         android:fontFamily="@font/monofett"
+        android:gravity="left"
         android:text="Nombre"
         android:textColor="#FF9800"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.262"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.086" />

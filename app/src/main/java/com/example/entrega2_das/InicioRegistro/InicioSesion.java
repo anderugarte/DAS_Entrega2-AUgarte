@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
 public class InicioSesion extends AppCompatActivity {
@@ -30,6 +31,10 @@ public class InicioSesion extends AppCompatActivity {
                 // Se recogen los campos rellenados por el usuario
                 String user = tUsername.getText().toString();
                 String pass = tPassword.getText().toString();
+
+                Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
+                startActivity(mp);
+                finish();
 
             }
         });
