@@ -30,6 +30,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
         Button bNP = (Button) findViewById(R.id.bNP);
         Button bMP = (Button) findViewById(R.id.bMP);
+        Button bAc = (Button) findViewById(R.id.bAc);
 
         bNP.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +45,15 @@ public class MenuPrincipal extends AppCompatActivity {
             public void onClick(View v) {
                 Intent mp = new Intent (context, MiPerfil.class);
                 startActivity(mp);
+            }
+        });
+
+        bAc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent mp = new Intent (context, MenuPrincipal.class);
+                startActivity(mp);
+                finish();
             }
         });
     }

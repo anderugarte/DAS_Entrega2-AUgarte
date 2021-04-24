@@ -71,7 +71,7 @@
         app:layout_constraintVertical_bias="0.005" />
 
     <EditText
-        android:id="@+id/tpContrasena"
+        android:id="@+id/ptContrasena"
         android:layout_width="261dp"
         android:layout_height="45dp"
         android:ems="10"
@@ -149,7 +149,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.728"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tpContrasena"
+        app:layout_constraintTop_toBottomOf="@+id/ptContrasena"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView

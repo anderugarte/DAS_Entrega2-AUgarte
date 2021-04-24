@@ -27,20 +27,19 @@
             android:name=".Principal.MiPerfil"
             android:theme="@style/ThemeNPMP" />
         <activity
-            android:name=".Principal.NuevaPublicacion"
-            android:theme="@style/ThemeNPMP" />
+            android:name=".Principal.NuevaPublicacion" />
         <activity
             android:name=".Principal.MenuPrincipal"
-            android:theme="@style/ThemeMenuPrincipal"></activity>
+            android:theme="@style/ThemeMenuPrincipal"/>
         <activity
             android:name=".InicioRegistro.RegistroFoto"
-            android:theme="@style/ThemeRegistroFoto"></activity>
+            android:theme="@style/ThemeRegistroFoto"/>
         <activity
             android:name=".InicioRegistro.Registro"
-            android:theme="@style/ThemeRegistro"></activity>
+            android:theme="@style/ThemeRegistro"/>
         <activity
             android:name=".InicioRegistro.InicioSesion"
-            android:theme="@style/ThemeInicioSesion"></activity>
+            android:theme="@style/ThemeInicioSesion"/>
         <activity
             android:name=".Principal.MainActivity"
             android:theme="@style/AppTheme">
@@ -50,6 +49,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".Firebase.ServicioFirebase"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_wit_round" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/white" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="canal por defecto" />
 
         <meta-data
             android:name="preloaded_fonts"

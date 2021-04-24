@@ -49,8 +49,6 @@ public class InicioSesion extends AppCompatActivity {
                 });
         workManager.enqueue(otwr);
 
-
-
         EditText tUsername = (EditText) findViewById(R.id.ptUsername);
         EditText tPassword = (EditText) findViewById(R.id.ptPassword);
         Button bIniSes = (Button) findViewById(R.id.bIniSes);

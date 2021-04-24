@@ -38,8 +38,6 @@ public class conexionDBDAS extends Worker {
         }
         urlConnection.disconnect();
 
-
-
     }
 
     @NonNull

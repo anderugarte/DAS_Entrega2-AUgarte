@@ -7,6 +7,40 @@
     android:background="@drawable/fondomenuprincipal"
     tools:context=".Principal.MenuPrincipal">
 
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="189dp"
+        android:layout_height="26dp"
+        android:background="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:gravity="center|right"
+        android:text="Username"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFeed"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/bAc"
+        android:layout_width="122dp"
+        android:layout_height="32dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/monofett"
+        android:gravity="center"
+        android:text="Actualizar"
+        android:textColor="#FF9800"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/bNP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvUbi"
+        app:layout_constraintVertical_bias="0.16" />
+
     <Button
         android:id="@+id/bNP"
         android:layout_width="240dp"
@@ -41,13 +75,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/lPosts"
-        android:layout_width="430dp"
-        android:layout_height="634dp"
+    <ImageView
+        android:id="@+id/imgFeed"
+        android:layout_width="369dp"
+        android:layout_height="482dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.276" />
+        app:layout_constraintVertical_bias="0.064"
+        app:srcCompat="@drawable/landscape" />
+
+    <TextView
+        android:id="@+id/tvUbi"
+        android:layout_width="189dp"
+        android:layout_height="26dp"
+        android:background="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:gravity="center|left"
+        android:text="Ubicación"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgFeed"
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

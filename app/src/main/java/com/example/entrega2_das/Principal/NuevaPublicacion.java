@@ -1,7 +1,9 @@
 package com.example.entrega2_das.Principal;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,11 +28,15 @@ public class NuevaPublicacion extends AppCompatActivity {
 
     ImageView foto;
     Boolean ubi = false, fto = false;
+    private AlertDialog.Builder alertDialogBuilder;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nueva_publicacion);
+
+        context = this;
 
         Button bF = (Button) findViewById(R.id.bCamara);
         Button bG = (Button) findViewById(R.id.bGaleria);
@@ -128,6 +134,23 @@ public class NuevaPublicacion extends AppCompatActivity {
             foto.setImageURI(imagenSeleccionada);
             fto = true;
         }
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("WIT?");
+        alertDialogBuilder.setMessage("¿Descartar publicación?")
+                .setCancelable(false)
+                .setPositiveButton("Descartar", (dialog, which) -> {
+                    // Descartar la nueva publicacion
+                    Intent mp = new Intent(context, MenuPrincipal.class);
+                    mp.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(mp);
+                    finish();
+                })
+                .setNegativeButton("Continuar", (dialog, which) -> dialog.cancel()).create().show();
 
     }
 
