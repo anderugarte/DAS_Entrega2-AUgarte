@@ -79,7 +79,9 @@ public class InicioSesion extends AppCompatActivity {
                     }
                 } else if (user.length()>0 && pass.length()>0) { // No existe campos vacios, se comprobara si los campos introducidos por el usuario son correctos
 
+                    // Existe un usuario con dichas credenciales asi que se inicia sesion
                     Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
+                    mp.putExtra("username", user);
                     startActivity(mp);
                     finish();
                 }

@@ -30,6 +30,7 @@ public class NuevaPublicacion extends AppCompatActivity {
     Boolean ubi = false, fto = false;
     private AlertDialog.Builder alertDialogBuilder;
     private Context context;
+    private String usuarioN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,17 @@ public class NuevaPublicacion extends AppCompatActivity {
         Button bG = (Button) findViewById(R.id.bGaleria);
         Button bU = (Button) findViewById(R.id.bUbicacion);
         Button bP = (Button) findViewById(R.id.bPublicar);
+
+        // Recibimos el username del usuario
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuarioN = extras.getString("userNo");
+        }
+
+        foto = (ImageView) findViewById(R.id.foto);
+
+        // Establecemos la foto predefinida
+        foto.setImageResource(R.drawable.landscape);
 
         // Obtener una imagen desde la camara
         bF.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +117,6 @@ public class NuevaPublicacion extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        foto = (ImageView) findViewById(R.id.foto);
 
         // Imagen de la camara
         if (requestCode == 6666 && resultCode == RESULT_OK) {

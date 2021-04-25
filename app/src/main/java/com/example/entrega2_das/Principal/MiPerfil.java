@@ -11,6 +11,8 @@ import com.example.entrega2_das.R;
 
 public class MiPerfil extends AppCompatActivity {
 
+    private String usuName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +20,12 @@ public class MiPerfil extends AppCompatActivity {
 
         Button bAc = (Button) findViewById(R.id.bA);
         Button bCa = (Button) findViewById(R.id.bC);
+
+        // Recibimos el username del usuario
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuName = extras.getString("userN");
+        }
 
         bAc.setOnClickListener(new View.OnClickListener() {
             @Override

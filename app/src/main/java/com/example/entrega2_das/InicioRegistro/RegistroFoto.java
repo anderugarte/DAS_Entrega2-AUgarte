@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -29,15 +31,31 @@ public class RegistroFoto extends AppCompatActivity {
 
     ImageView fp;
     Boolean cambiado = false;
+    String username,nom,ape,con,cum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_foto);
 
+        fp = (ImageView) findViewById(R.id.fotoPerfil);
+
         Button bTF = (Button) findViewById(R.id.bTomarFoto);
         Button bTG = (Button) findViewById(R.id.bTomarGaleria);
         Button bC = (Button) findViewById(R.id.bContinuar);
+
+        // Establecemos la foto de perfil por defecto
+        fp.setImageResource(R.drawable.perfil);
+
+        // Recibimos el nombre de usuario del usuario que se ha registrado al igual que el resto de sus datos
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            username = extras.getString("username");
+            nom = extras.getString("nombre");
+            ape = extras.getString("apellidos");
+            con = extras.getString("contrasena");
+            cum = extras.getString("cumple");
+        }
 
         // Gestionar sacar una foto con la camara
         bTF.setOnClickListener(new View.OnClickListener() {
@@ -71,8 +89,9 @@ public class RegistroFoto extends AppCompatActivity {
                     builder.setPositiveButton(txt1, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            // Crear cuenta
+                            // Crear cuenta sin foto de perfil
                             Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
+                            mp.putExtra("username",username);
                             startActivity(mp);
                             finish();
                         }
@@ -88,8 +107,9 @@ public class RegistroFoto extends AppCompatActivity {
                     builder.show();
 
                 } else {
-                    // Crear cuenta
+                    // Crear cuenta con foto de perfil
                     Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
+                    mp.putExtra("username",username);
                     startActivity(mp);
                     finish();
                 }
@@ -100,7 +120,6 @@ public class RegistroFoto extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        fp = (ImageView) findViewById(R.id.fotoPerfil);
 
         // Imagen de la camara
         if (requestCode == 8888 && resultCode == RESULT_OK) {
@@ -111,10 +130,19 @@ public class RegistroFoto extends AppCompatActivity {
             String nombrefichero = "IMG_" + timeStamp + "_";
             File imagenFich = new File(eldirectorio, nombrefichero + ".jpg");
             OutputStream os;
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            laminiatura.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] fototransformada = stream.toByteArray();
+            String fotoen64 = Base64.encodeToString(fototransformada,Base64.DEFAULT);
+            Uri.Builder builder = new Uri.Builder()
+                    .appendQueryParameter("identificador", username)
+                    .appendQueryParameter("imagen", fotoen64);
+            String parametrosURL = builder.build().getEncodedQuery();
             try {
                 fp.setImageBitmap(laminiatura);
                 os = new FileOutputStream(imagenFich);
                 laminiatura.compress(Bitmap.CompressFormat.JPEG, 100, os);
+                cambiado = true;
                 os.flush();
                 os.close();
             } catch (Exception e) {
@@ -126,8 +154,9 @@ public class RegistroFoto extends AppCompatActivity {
         if (requestCode == 9999 && resultCode == RESULT_OK) {
             Uri imagenSeleccionada = data.getData();
             fp.setImageURI(imagenSeleccionada);
+            cambiado = true;
         }
-        cambiado = true;
+
     }
 
     private void dispatchTakePictureIntent() {

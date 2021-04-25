@@ -18,6 +18,7 @@ import com.example.entrega2_das.R;
 
 public class MenuPrincipal extends AppCompatActivity {
 
+    private String nomUsu;
     private Context context;
     private AlertDialog.Builder alertDialogBuilder;
 
@@ -32,10 +33,17 @@ public class MenuPrincipal extends AppCompatActivity {
         Button bMP = (Button) findViewById(R.id.bMP);
         Button bAc = (Button) findViewById(R.id.bAc);
 
+        // Recibimos el nombre de usuario del usuario que se ha registrado o ha iniciado sesion
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            nomUsu = extras.getString("username");
+        }
+
         bNP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent np = new Intent (context, NuevaPublicacion.class);
+                np.putExtra("userNo",nomUsu);
                 startActivity(np);
             }
         });
@@ -44,6 +52,7 @@ public class MenuPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent mp = new Intent (context, MiPerfil.class);
+                mp.putExtra("userN",nomUsu);
                 startActivity(mp);
             }
         });

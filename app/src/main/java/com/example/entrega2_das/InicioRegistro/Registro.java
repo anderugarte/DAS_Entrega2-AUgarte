@@ -63,7 +63,13 @@ public class Registro extends AppCompatActivity {
 
                 }
 
+                // Todos los campos son correctos asi que se traslada al usuario a la interfaz correspondiente a la foto de perfil
                 Intent rf = new Intent (getBaseContext(), RegistroFoto.class);
+                rf.putExtra("username",u);
+                rf.putExtra("nombre",n);
+                rf.putExtra("apellidos",a);
+                rf.putExtra("contrasena",p);
+                rf.putExtra("cumple",d);
                 startActivity(rf);
 
             }
