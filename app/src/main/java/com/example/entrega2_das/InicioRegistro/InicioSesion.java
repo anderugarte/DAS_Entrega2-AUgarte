@@ -1,56 +1,37 @@
 package com.example.entrega2_das.InicioRegistro;
 
-import androidx.activity.OnBackPressedCallback;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
+import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.entrega2_das.DataBase.conexionDBDAS;
-import com.example.entrega2_das.Principal.MainActivity;
 import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
-import java.io.PrintWriter;
-
 public class InicioSesion extends AppCompatActivity {
+
+    EditText tUsername;
+    EditText tPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio_sesion);
 
-        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(conexionDBDAS.class).build();
-        WorkManager workManager  = WorkManager.getInstance(this);
-        workManager.getWorkInfoByIdLiveData(otwr.getId())
-                .observe(this, new Observer<WorkInfo>() {
-                    @Override
-                    public void onChanged(WorkInfo workInfo) {
-                        if(workInfo != null && workInfo.getState().isFinished()){
-                            //TextView textViewResult = findViewById(R.id.textoResultado);
-                            //textViewResult.setText(workInfo.getOutputData().getString("datos"));
-                            String a = workInfo.getOutputData().getString("datos");
-                        }
-                    }
-                });
-        workManager.enqueue(otwr);
+        tUsername = (EditText) findViewById(R.id.ptUsername);
+        tPassword = (EditText) findViewById(R.id.ptPassword);
 
-        EditText tUsername = (EditText) findViewById(R.id.ptUsername);
-        EditText tPassword = (EditText) findViewById(R.id.ptPassword);
         Button bIniSes = (Button) findViewById(R.id.bIniSes);
         Button bRegis = (Button) findViewById(R.id.bRegis);
 
@@ -78,12 +59,8 @@ public class InicioSesion extends AppCompatActivity {
                         aviso.show();
                     }
                 } else if (user.length()>0 && pass.length()>0) { // No existe campos vacios, se comprobara si los campos introducidos por el usuario son correctos
-
-                    // Existe un usuario con dichas credenciales asi que se inicia sesion
-                    Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
-                    mp.putExtra("username", user);
-                    startActivity(mp);
-                    finish();
+                    // Se accede al metodo que gestiona la conexion e inicio de sesion
+                    gestionarConexion(user,pass);
                 }
 
             }
@@ -98,6 +75,42 @@ public class InicioSesion extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+
+    private void gestionarConexion(String user, String pass) {
+
+        Data resultados = new Data.Builder()
+                .putString("username",user)
+                .putString("password",pass)
+                .build();
+
+        OneTimeWorkRequest trabajoPuntualIS = new OneTimeWorkRequest.Builder(conexionDBDAS.class)
+                .setInputData(resultados)
+                .build();
+
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualIS.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo status) {
+                        if (status != null && status.getState().isFinished()) {
+                            if (status.getOutputData().getString("resultado").equals("true")) {
+                                // Login correcto (existe un usuario con dichas credenciales asi que se inicia sesion)
+                                Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
+                                mp.putExtra("username", user);
+                                startActivity(mp);
+                                finish();
+                            } else {
+                                // Login incorrecto (no existe ningun usuario con dichas credenciales)
+                                int tiempo= Toast.LENGTH_SHORT;
+                                Toast aviso = Toast.makeText(getApplicationContext(), "Error / Campos incorrectos", tiempo);
+                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                                aviso.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualIS);
 
     }
 }

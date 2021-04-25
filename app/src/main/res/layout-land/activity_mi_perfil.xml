@@ -7,6 +7,80 @@
     android:background="@drawable/fondomiperfilland"
     tools:context=".Principal.MiPerfil">
 
+    <EditText
+        android:id="@+id/etCumpleBD"
+        android:layout_width="125dp"
+        android:layout_height="21dp"
+        android:ems="10"
+        android:fontFamily="@font/allerta_stencil"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintStart_toEndOf="@+id/tvCumpleanos"
+        app:layout_constraintTop_toBottomOf="@+id/etContrasenaBD"
+        app:layout_constraintVertical_bias="0.086" />
+
+    <EditText
+        android:id="@+id/etContrasenaBD"
+        android:layout_width="125dp"
+        android:layout_height="21dp"
+        android:ems="10"
+        android:fontFamily="@font/allerta_stencil"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.531"
+        app:layout_constraintStart_toEndOf="@+id/tvContra"
+        app:layout_constraintTop_toBottomOf="@+id/etApellidosBD"
+        app:layout_constraintVertical_bias="0.072" />
+
+    <EditText
+        android:id="@+id/etNombreBD"
+        android:layout_width="125dp"
+        android:layout_height="21dp"
+        android:ems="10"
+        android:fontFamily="@font/allerta_stencil"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintStart_toEndOf="@+id/tvNom"
+        app:layout_constraintTop_toBottomOf="@+id/tvNUsuBD"
+        app:layout_constraintVertical_bias="0.054" />
+
+    <TextView
+        android:id="@+id/tvNUsuBD"
+        android:layout_width="128dp"
+        android:layout_height="21dp"
+        android:fontFamily="@font/allerta_stencil"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintStart_toEndOf="@+id/tvNUsu"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.189" />
+
+    <EditText
+        android:id="@+id/etApellidosBD"
+        android:layout_width="125dp"
+        android:layout_height="21dp"
+        android:ems="10"
+        android:fontFamily="@font/allerta_stencil"
+        android:inputType="textPersonName"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toEndOf="@+id/tvApe"
+        app:layout_constraintTop_toBottomOf="@+id/etNombreBD"
+        app:layout_constraintVertical_bias="0.062" />
+
     <Button
         android:id="@+id/bC"
         android:layout_width="wrap_content"
