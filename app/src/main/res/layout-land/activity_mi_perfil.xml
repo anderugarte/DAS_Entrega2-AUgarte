@@ -9,23 +9,23 @@
 
     <EditText
         android:id="@+id/etCumpleBD"
-        android:layout_width="125dp"
-        android:layout_height="21dp"
+        android:layout_width="126dp"
+        android:layout_height="38dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.163"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toEndOf="@+id/tvCumpleanos"
         app:layout_constraintTop_toBottomOf="@+id/etContrasenaBD"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etContrasenaBD"
-        android:layout_width="125dp"
-        android:layout_height="21dp"
+        android:layout_width="124dp"
+        android:layout_height="37dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"
@@ -35,22 +35,23 @@
         app:layout_constraintHorizontal_bias="0.531"
         app:layout_constraintStart_toEndOf="@+id/tvContra"
         app:layout_constraintTop_toBottomOf="@+id/etApellidosBD"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/etNombreBD"
-        android:layout_width="125dp"
-        android:layout_height="21dp"
+        android:layout_width="126dp"
+        android:layout_height="39dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.62"
+        app:layout_constraintHorizontal_bias="0.627"
         app:layout_constraintStart_toEndOf="@+id/tvNom"
         app:layout_constraintTop_toBottomOf="@+id/tvNUsuBD"
-        app:layout_constraintVertical_bias="0.054" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/tvNUsuBD"
@@ -69,17 +70,18 @@
     <EditText
         android:id="@+id/etApellidosBD"
         android:layout_width="125dp"
-        android:layout_height="21dp"
+        android:layout_height="40dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.556"
         app:layout_constraintStart_toEndOf="@+id/tvApe"
         app:layout_constraintTop_toBottomOf="@+id/etNombreBD"
-        app:layout_constraintVertical_bias="0.062" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/bC"
@@ -90,10 +92,10 @@
         android:text="Cancelar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.85"
+        app:layout_constraintHorizontal_bias="0.693"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCumpleanos"
-        app:layout_constraintVertical_bias="0.409" />
+        app:layout_constraintVertical_bias="0.45" />
 
     <TextView
         android:id="@+id/tvNUsu"
@@ -181,17 +183,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/perfil" />
 
-    <Button
-        android:id="@+id/bA"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FF9800"
-        android:fontFamily="@font/allerta_stencil"
-        android:text="Modificar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCumpleanos"
-        app:layout_constraintVertical_bias="0.409" />
 </androidx.constraintlayout.widget.ConstraintLayout>
