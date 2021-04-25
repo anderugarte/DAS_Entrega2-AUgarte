@@ -18,22 +18,27 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class registroDBDAS extends Worker {
+public class registroFotoDBDAS extends Worker {
 
-    Data resultadosR = new Data.Builder().build();
+    Data resultadosRF = new Data.Builder().build();
 
-    public registroDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public registroFotoDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
     @NonNull
     @Override
     public Result doWork() {
-        String direccion = "http://ec2-54-167-31-169.compute-1.amazonaws.com/augarte059/WEB/registroBD.php";
+        String direccion = "http://ec2-54-167-31-169.compute-1.amazonaws.com/augarte059/WEB/registroFotoBD.php";
         String result = "";
         HttpURLConnection urlConnection = null;
 
         String username = getInputData().getString("username");
+        String nombre = getInputData().getString("nombre");
+        String apellidos = getInputData().getString("apellidos");
+        String password = getInputData().getString("password");
+        String cumpleanos = getInputData().getString("cumpleanos");
+        String fotoperfil = getInputData().getString("fotoperfil");
 
         try {
             URL destino = new URL(direccion);
@@ -45,6 +50,11 @@ public class registroDBDAS extends Worker {
 
             JSONObject params = new JSONObject();
             params.put("username",username);
+            params.put("nombre",nombre);
+            params.put("apellidos",apellidos);
+            params.put("password",password);
+            params.put("cumpleanos",cumpleanos);
+            params.put("fotoperfil",fotoperfil);
 
             urlConnection.setRequestProperty("Content-Type","application/json");
 
@@ -63,12 +73,12 @@ public class registroDBDAS extends Worker {
                 }
                 inputStream.close();
 
-                resultadosR = new Data.Builder().putString("resultado",result).build();
+                resultadosRF = new Data.Builder().putString("resultado",result).build();
 
             }
         } catch (MalformedURLException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
         urlConnection.disconnect();
 
-        return Result.success(resultadosR);
+        return Result.success(resultadosRF);
     }
 }

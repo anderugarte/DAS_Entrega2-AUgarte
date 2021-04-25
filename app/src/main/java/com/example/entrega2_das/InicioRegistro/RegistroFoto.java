@@ -2,6 +2,11 @@ package com.example.entrega2_das.InicioRegistro;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,10 +17,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.entrega2_das.DataBase.conexionDBDAS;
+import com.example.entrega2_das.DataBase.registroFotoDBDAS;
 import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
@@ -90,14 +99,7 @@ public class RegistroFoto extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             // Crear cuenta sin foto de perfil
-
-//                            Bitmap pordefecto = (Bitmap) extras.get(toString(R.drawable.perfil));
-//                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                            pordefecto.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//                            byte[] fototransformada = stream.toByteArray();
-//                            String fotoen64 = Base64.encodeToString(fototransformada,Base64.DEFAULT);
-//
-//                            gestionarRegistroFoto(username, nom, ape, con, cum, fotoen64);
+                            gestionarRegistroFoto(username, nom, ape, con, cum, fp.toString());
 
                             Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
                             mp.putExtra("username",username);
@@ -117,16 +119,50 @@ public class RegistroFoto extends AppCompatActivity {
 
                 } else {
                     // Crear cuenta con foto de perfil
-                    Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
-                    mp.putExtra("username",username);
-                    startActivity(mp);
-                    finish();
+                    gestionarRegistroFoto(username, nom, ape, con, cum, fp.toString());
                 }
             }
         });
     }
 
-    private void gestionarRegistroFoto(String username, String nom, String ape, String con, String cum, String fotoen64) {
+    private void gestionarRegistroFoto(String username, String nom, String ape, String con, String cum, String foto) {
+
+        Data resultadosRF = new Data.Builder()
+                .putString("username",username)
+                .putString("nombre",nom)
+                .putString("apellidos",ape)
+                .putString("password",con)
+                .putString("cumpleanos",cum)
+                .putString("fotoperfil",foto)
+                .build();
+
+        OneTimeWorkRequest trabajoPuntualRF = new OneTimeWorkRequest.Builder(registroFotoDBDAS.class)
+                .setInputData(resultadosRF)
+                .build();
+
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualRF.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo status) {
+                        if (status != null && status.getState().isFinished()) {
+                            if (status.getOutputData().getString("resultado").equals("true")) {
+                                // Registro correcto
+                                Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
+                                mp.putExtra("username", username);
+                                startActivity(mp);
+                                finish();
+                            } else {
+                                // Registro incorrecto
+                                int tiempo= Toast.LENGTH_SHORT;
+                                Toast aviso = Toast.makeText(getApplicationContext(), "Error", tiempo);
+                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                                aviso.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualRF);
+
     }
 
     @Override
