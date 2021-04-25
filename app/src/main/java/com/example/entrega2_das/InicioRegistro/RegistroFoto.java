@@ -90,6 +90,15 @@ public class RegistroFoto extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             // Crear cuenta sin foto de perfil
+
+//                            Bitmap pordefecto = (Bitmap) extras.get(toString(R.drawable.perfil));
+//                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                            pordefecto.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//                            byte[] fototransformada = stream.toByteArray();
+//                            String fotoen64 = Base64.encodeToString(fototransformada,Base64.DEFAULT);
+//
+//                            gestionarRegistroFoto(username, nom, ape, con, cum, fotoen64);
+
                             Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
                             mp.putExtra("username",username);
                             startActivity(mp);
@@ -115,6 +124,9 @@ public class RegistroFoto extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void gestionarRegistroFoto(String username, String nom, String ape, String con, String cum, String fotoen64) {
     }
 
     @Override
