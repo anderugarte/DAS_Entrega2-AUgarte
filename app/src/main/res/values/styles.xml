@@ -7,10 +7,17 @@
         <item name="colorAccent">@android:color/black</item>
     </style>
 
+    <!--Thema de MainActivity-->
+    <style name="ThemeMainActivity" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">#598FED</item>
+        <item name="colorPrimaryDark">#002AAC</item>
+        <item name="colorAccent">@android:color/black</item>
+    </style>
+
     <!--Tema de InicioSesion-->
     <style name="ThemeInicioSesion" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@android:color/holo_blue_light</item>
-        <item name="colorPrimaryDark">@android:color/holo_blue_dark</item>
+        <item name="colorPrimary">#ECA872</item>
+        <item name="colorPrimaryDark">#9C6D48</item>
         <item name="colorAccent">@android:color/black</item>
     </style>
 

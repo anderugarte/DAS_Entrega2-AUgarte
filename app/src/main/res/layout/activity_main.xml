@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoinicio"
+    android:background="@drawable/fondoavion"
     tools:context=".Principal.MainActivity">
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_marginTop="19dp"
         android:background="#000000"
         android:fontFamily="@font/allerta_stencil"
-        android:text="Where Is That?"
+        android:text="     Where Is That?     "
         android:textColor="#FF9800"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/bIS"

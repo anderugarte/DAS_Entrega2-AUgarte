@@ -24,6 +24,9 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Entrega2_DAS">
         <activity
+            android:name=".Principal.MainActivity"
+            android:theme="@style/ThemeMainActivity" />
+        <activity
             android:name=".Principal.MiPerfil"
             android:theme="@style/ThemeNPMP" />
         <activity
