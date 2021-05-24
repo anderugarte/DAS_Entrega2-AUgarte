@@ -60,6 +60,8 @@ public class InicioSesion extends AppCompatActivity {
                     }
                 } else if (user.length()>0 && pass.length()>0) { // No existe campos vacios, se comprobara si los campos introducidos por el usuario son correctos
                     // Se accede al metodo que gestiona la conexion e inicio de sesion
+                    // Si existe se hara el inicio de sesión
+                    // Si no aparecerá un Toast
                     gestionarConexion(user,pass);
                 }
 
@@ -78,6 +80,7 @@ public class InicioSesion extends AppCompatActivity {
 
     }
 
+    // Comprobaremos en la BD si existe un usuario con ese username
     private void gestionarConexion(String user, String pass) {
 
         Data resultados = new Data.Builder()

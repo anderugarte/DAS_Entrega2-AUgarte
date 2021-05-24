@@ -32,7 +32,7 @@ public class obtenerDatosDBDAS extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        String direccion = "http://ec2-54-167-31-169.compute-1.amazonaws.com/augarte059/WEB/obtenerDatosBD.php";
+        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/obtenerDatosBD.php";
         String result = "";
         HttpURLConnection urlConnection = null;
 
