@@ -35,8 +35,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvContrasena"
         app:layout_constraintTop_toBottomOf="@+id/ptContrasena"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -51,8 +51,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.252"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvUsernameR"
         app:layout_constraintTop_toBottomOf="@+id/ptUsernameR"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -67,8 +67,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.598"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvApellidos"
         app:layout_constraintTop_toBottomOf="@+id/ptApellidos"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -98,8 +98,8 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.252"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvNombre"
         app:layout_constraintTop_toBottomOf="@+id/ptNombre"
         app:layout_constraintVertical_bias="0.0" />
 

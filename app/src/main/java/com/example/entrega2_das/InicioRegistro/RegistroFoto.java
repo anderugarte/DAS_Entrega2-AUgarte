@@ -1,5 +1,6 @@
 package com.example.entrega2_das.InicioRegistro;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -13,6 +14,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,6 +29,10 @@ import com.example.entrega2_das.DataBase.conexionDBDAS;
 import com.example.entrega2_das.DataBase.registroFotoDBDAS;
 import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -83,6 +89,7 @@ public class RegistroFoto extends AppCompatActivity {
             }
         });
 
+        // Registrarse
         bC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,19 +102,16 @@ public class RegistroFoto extends AppCompatActivity {
                     builder.setMessage("¿Está seguro de no añadir ninguna foto de perfil?");
                     builder.setCancelable(true);
 
+                    // Acepta
                     builder.setPositiveButton(txt1, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             // Crear cuenta sin foto de perfil
-                            gestionarRegistroFoto(username, nom, ape, con, cum, fp.toString());
-
-                            Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
-                            mp.putExtra("username",username);
-                            startActivity(mp);
-                            finish();
+                            gestionarRegistroFoto(username, nom, ape, con, cum);
                         }
                     });
 
+                    // Cancela
                     builder.setNegativeButton(txt2, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -119,26 +123,57 @@ public class RegistroFoto extends AppCompatActivity {
 
                 } else {
                     // Crear cuenta con foto de perfil
-                    gestionarRegistroFoto(username, nom, ape, con, cum, fp.toString());
+                    gestionarRegistroFoto(username, nom, ape, con, cum);
                 }
             }
         });
     }
 
-    private void gestionarRegistroFoto(String username, String nom, String ape, String con, String cum, String foto) {
+    // Metodo que gestionara el registro de un nuevo usuario
+    private void gestionarRegistroFoto(String user, String nom, String ape, String con, String cum) {
+
+        // ------------------------ Almacenaje de la foto de perfil ------------------------ //
+
+        //Instancia de FireBase
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // Crear una storage reference de nuestra app
+        StorageReference storageRef = storage.getReference();
+        // Crear una referencia a "fotoUser.jpg" siendo User el nombre de usuario
+        String ref = "FotosPerfil/foto" + username + ".jpg";
+        StorageReference fotoRef = storageRef.child(ref);
+
+        //Transformar el ImageView a bytes
+        BitmapDrawable bitmapDrawablefto = (BitmapDrawable) fp.getDrawable();
+        Bitmap bitmapFto = bitmapDrawablefto.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmapFto.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] data = stream.toByteArray();
+
+        UploadTask uploadTask = fotoRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Hacer algo cuando ocurra un error en la subida
+                int tiempo= Toast.LENGTH_SHORT;
+                String texto = "Ha ocurrido un error al guardar la foto de perfil";
+                Toast aviso = Toast.makeText(getApplicationContext(), texto, tiempo);
+                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                aviso.show();
+            }
+        });
+
+        // ------------------------ Registro del usuario ------------------------ //
 
         Data resultadosRF = new Data.Builder()
-                .putString("username",username)
+                .putString("username",user)
                 .putString("nombre",nom)
                 .putString("apellidos",ape)
                 .putString("password",con)
                 .putString("cumpleanos",cum)
-                .putString("fotoperfil",foto)
                 .build();
 
         OneTimeWorkRequest trabajoPuntualRF = new OneTimeWorkRequest.Builder(registroFotoDBDAS.class)
-                .setInputData(resultadosRF)
-                .build();
+                .setInputData(resultadosRF).build();
 
         WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualRF.getId())
                 .observe(this, new Observer<WorkInfo>() {
@@ -147,8 +182,9 @@ public class RegistroFoto extends AppCompatActivity {
                         if (status != null && status.getState().isFinished()) {
                             if (status.getOutputData().getString("resultado").equals("true")) {
                                 // Registro correcto
+                                // Almacenar la imagen en Firebase
                                 Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
-                                mp.putExtra("username", username);
+                                mp.putExtra("username", user);
                                 startActivity(mp);
                                 finish();
                             } else {
@@ -178,14 +214,14 @@ public class RegistroFoto extends AppCompatActivity {
             String nombrefichero = "IMG_" + timeStamp + "_";
             File imagenFich = new File(eldirectorio, nombrefichero + ".jpg");
             OutputStream os;
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            laminiatura.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte[] fototransformada = stream.toByteArray();
-            String fotoen64 = Base64.encodeToString(fototransformada,Base64.DEFAULT);
-            Uri.Builder builder = new Uri.Builder()
-                    .appendQueryParameter("identificador", username)
-                    .appendQueryParameter("imagen", fotoen64);
-            String parametrosURL = builder.build().getEncodedQuery();
+//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//            laminiatura.compress(Bitmap.CompressFormat.PNG, 100, stream);
+//            byte[] fototransformada = stream.toByteArray();
+//            String fotoen64 = Base64.encodeToString(fototransformada,Base64.DEFAULT);
+//            Uri.Builder builder = new Uri.Builder()
+//                    .appendQueryParameter("identificador", username)
+//                    .appendQueryParameter("imagen", fotoen64);
+//            String parametrosURL = builder.build().getEncodedQuery();
             try {
                 fp.setImageBitmap(laminiatura);
                 os = new FileOutputStream(imagenFich);

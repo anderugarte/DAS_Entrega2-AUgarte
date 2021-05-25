@@ -9,6 +9,7 @@ import androidx.work.WorkManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ public class InicioSesion extends AppCompatActivity {
 
     EditText tUsername;
     EditText tPassword;
+    String user, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +43,8 @@ public class InicioSesion extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Se recogen los campos rellenados por el usuario
-                String user = tUsername.getText().toString();
-                String pass = tPassword.getText().toString();
+                user = tUsername.getText().toString();
+                pass = tPassword.getText().toString();
 
                 // Gestion del inicio de sesion
                 // Primero, se comprueba si existen campos vacios
@@ -58,7 +60,7 @@ public class InicioSesion extends AppCompatActivity {
                         aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
                         aviso.show();
                     }
-                } else if (user.length()>0 && pass.length()>0) { // No existe campos vacios, se comprobara si los campos introducidos por el usuario son correctos
+                } else { // No existe campos vacios, se comprobara si los campos introducidos por el usuario son correctos
                     // Se accede al metodo que gestiona la conexion e inicio de sesion
                     // Si existe se hara el inicio de sesión
                     // Si no aparecerá un Toast
@@ -81,26 +83,25 @@ public class InicioSesion extends AppCompatActivity {
     }
 
     // Comprobaremos en la BD si existe un usuario con ese username
-    private void gestionarConexion(String user, String pass) {
+    private void gestionarConexion(String usern, String passw) {
 
         Data resultados = new Data.Builder()
-                .putString("username",user)
-                .putString("password",pass)
+                .putString("username",usern)
+                .putString("password",passw)
                 .build();
 
-        OneTimeWorkRequest trabajoPuntualIS = new OneTimeWorkRequest.Builder(conexionDBDAS.class)
-                .setInputData(resultados)
-                .build();
+        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(conexionDBDAS.class)
+                .setInputData(resultados).build();
 
-        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualIS.getId())
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(otwr.getId())
                 .observe(this, new Observer<WorkInfo>() {
                     @Override
                     public void onChanged(WorkInfo status) {
                         if (status != null && status.getState().isFinished()) {
-                            if (status.getOutputData().getString("resultado").equals("true")) {
+                            if (status.getOutputData().getString("result").equals("logOK")) {
                                 // Login correcto (existe un usuario con dichas credenciales asi que se inicia sesion)
-                                Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
-                                mp.putExtra("username", user);
+                                Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
+                                mp.putExtra("username", usern);
                                 startActivity(mp);
                                 finish();
                             } else {
@@ -113,7 +114,7 @@ public class InicioSesion extends AppCompatActivity {
                         }
                     }
                 });
-        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualIS);
+        WorkManager.getInstance(getApplicationContext()).enqueue(otwr);
 
     }
 }

@@ -20,8 +20,6 @@ import java.net.URL;
 
 public class registroDBDAS extends Worker {
 
-    Data resultadosR = new Data.Builder().build();
-
     public registroDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -31,6 +29,7 @@ public class registroDBDAS extends Worker {
     public Result doWork() {
         String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/registroBD.php";
         String result = "";
+        Data resultadosR = null;
         HttpURLConnection urlConnection = null;
 
         String username = getInputData().getString("username");

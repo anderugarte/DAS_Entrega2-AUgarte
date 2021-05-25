@@ -23,8 +23,6 @@ import java.net.URL;
 
 public class obtenerDatosDBDAS extends Worker {
 
-    Data resultadosOD = new Data.Builder().build();
-
     public obtenerDatosDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -34,6 +32,7 @@ public class obtenerDatosDBDAS extends Worker {
     public Result doWork() {
         String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/obtenerDatosBD.php";
         String result = "";
+        Data resultadosOD = null;
         HttpURLConnection urlConnection = null;
 
         String username = getInputData().getString("username");
@@ -70,18 +69,12 @@ public class obtenerDatosDBDAS extends Worker {
                 JSONObject json = (JSONObject) parser.parse(result);
                 String nombre = (String) json.get("nombre");
                 String apellidos = (String)json.get("apellidos");
-                String usuario = (String) json.get("username");
-                String password = (String) json.get("password");
                 String cumpleanos = (String) json.get("cumpleanos");
-                String fotoperfil = (String) json.get("fotoperfil");
 
                 resultadosOD = new Data.Builder()
                         .putString("nom",nombre)
                         .putString("ape",apellidos)
-                        .putString("usu",usuario)
-                        .putString("pas",password)
                         .putString("cum",cumpleanos)
-                        .putString("fot",fotoperfil)
                         .build();
 
             }

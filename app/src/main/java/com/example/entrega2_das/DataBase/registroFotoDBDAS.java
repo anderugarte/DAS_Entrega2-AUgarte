@@ -20,8 +20,6 @@ import java.net.URL;
 
 public class registroFotoDBDAS extends Worker {
 
-    Data resultadosRF = new Data.Builder().build();
-
     public registroFotoDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
@@ -31,6 +29,7 @@ public class registroFotoDBDAS extends Worker {
     public Result doWork() {
         String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/registroFotoBD.php";
         String result = "";
+        Data resultadosRF = null;
         HttpURLConnection urlConnection = null;
 
         String username = getInputData().getString("username");
@@ -38,7 +37,6 @@ public class registroFotoDBDAS extends Worker {
         String apellidos = getInputData().getString("apellidos");
         String password = getInputData().getString("password");
         String cumpleanos = getInputData().getString("cumpleanos");
-        String fotoperfil = getInputData().getString("fotoperfil");
 
         try {
             URL destino = new URL(direccion);
@@ -54,7 +52,6 @@ public class registroFotoDBDAS extends Worker {
             params.put("apellidos",apellidos);
             params.put("password",password);
             params.put("cumpleanos",cumpleanos);
-            params.put("fotoperfil",fotoperfil);
 
             urlConnection.setRequestProperty("Content-Type","application/json");
 

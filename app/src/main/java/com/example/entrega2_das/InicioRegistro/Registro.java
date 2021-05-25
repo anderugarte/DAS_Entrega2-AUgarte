@@ -73,11 +73,33 @@ public class Registro extends AppCompatActivity {
                     aviso.show();
                 } else if (n.length()>0 && a.length()>0 && u.length()>0 && p.length()>0 && d.length()>0) {
                     // Ahora compruebo si los campos introducidos son validos
-                    gestionarRegistro(n,a,u,p,d);
+                    if (containsDigit(n) || containsDigit(a)){
+                        int tiempo = Toast.LENGTH_SHORT;
+                        Toast aviso = Toast.makeText(getApplicationContext(), "El nombre o los apellidos contiene números", tiempo);
+                        aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
+                        aviso.show();
+                    } else {
+                        gestionarRegistro(n,a,u,p,d);
+                    }
                 }
 
             }
         });
+    }
+
+    // Comprueba si el String contiene numeros o no
+    public final boolean containsDigit(String s) {
+        boolean containsDigit = false;
+
+        if (s != null && !s.isEmpty()) {
+            for (char c : s.toCharArray()) {
+                if (containsDigit = Character.isDigit(c)) {
+                    break;
+                }
+            }
+        }
+
+        return containsDigit;
     }
 
     private void gestionarRegistro(String n, String a, String u, String p, String d) {

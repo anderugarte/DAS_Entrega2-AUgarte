@@ -3,7 +3,6 @@
     package="com.example.entrega2_das">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -21,11 +20,8 @@
         android:label="WIT?"
         android:roundIcon="@mipmap/ic_wit_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Entrega2_DAS">
-        <activity
-            android:name=".Principal.MainActivity"
-            android:theme="@style/ThemeMainActivity" />
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".Principal.MiPerfil"
             android:theme="@style/ThemeNPMP" />

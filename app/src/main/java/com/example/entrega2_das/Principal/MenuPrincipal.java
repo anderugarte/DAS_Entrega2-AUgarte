@@ -39,6 +39,7 @@ public class MenuPrincipal extends AppCompatActivity {
             nomUsu = extras.getString("username");
         }
 
+        // Acceder a Nueva Publicacion
         bNP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,6 +49,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        // Acceder a Mi Perfil
         bMP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,6 +59,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
+        // Actualizar la interfaz
         bAc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +70,7 @@ public class MenuPrincipal extends AppCompatActivity {
         });
     }
 
+    // Gestiona la acciona cuando el usuario pulsa el boton 'Atras' de su dispositivo
     @Override
     public void onBackPressed(){
         alertDialogBuilder = new AlertDialog.Builder(this);
@@ -81,7 +85,6 @@ public class MenuPrincipal extends AppCompatActivity {
                     finish();
                 })
                 .setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel()).create().show();
-
     }
 
 }
