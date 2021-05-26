@@ -16,15 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-//import com.example.entrega2_das.DataBase.conexionDBDAS;
-//import com.example.entrega2_das.Principal.MenuPrincipal;
+import com.example.entrega2_das.DataBase.conexionDBDAS;
+import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
 public class InicioSesion extends AppCompatActivity {
 
     EditText tUsername;
     EditText tPassword;
-    String user, pass = "";
+    String user, pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +64,7 @@ public class InicioSesion extends AppCompatActivity {
                     // Se accede al metodo que gestiona la conexion e inicio de sesion
                     // Si existe se hara el inicio de sesión
                     // Si no aparecerá un Toast
-                    //gestionarConexion();
-                    Log.i("AAAA","Param " + user);
-                    Log.i("AAAA","Param2 " + pass);
+                    gestionarConexion();
                 }
 
             }
@@ -85,38 +83,38 @@ public class InicioSesion extends AppCompatActivity {
     }
 
     // Comprobaremos en la BD si existe un usuario con ese username
-//    private void gestionarConexion() {
-//
-//        Data resultados = new Data.Builder()
-//                .putString("username",user)
-//                .putString("password",pass)
-//                .build();
-//
-//        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(conexionDBDAS.class)
-//                .setInputData(resultados).build();
-//
-//        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(otwr.getId())
-//                .observe(this, new Observer<WorkInfo>() {
-//                    @Override
-//                    public void onChanged(WorkInfo status) {
-//                        if (status != null && status.getState().isFinished()) {
-//                            if (status.getOutputData().getString("result").equals("logOK")) {
-//                                // Login correcto (existe un usuario con dichas credenciales asi que se inicia sesion)
-//                                Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
-//                                mp.putExtra("username", user);
-//                                startActivity(mp);
-//                                finish();
-//                            } else {
-//                                // Login incorrecto (no existe ningun usuario con dichas credenciales)
-//                                int tiempo= Toast.LENGTH_SHORT;
-//                                Toast aviso = Toast.makeText(getApplicationContext(), "Error / Campos incorrectos", tiempo);
-//                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
-//                                aviso.show();
-//                            }
-//                        }
-//                    }
-//                });
-//        WorkManager.getInstance(getApplicationContext()).enqueue(otwr);
-//
-//    }
+    private void gestionarConexion() {
+
+        Data resultados = new Data.Builder()
+                .putString("username",user)
+                .putString("password",pass)
+                .build();
+
+        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(conexionDBDAS.class)
+                .setInputData(resultados).build();
+
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(otwr.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo status) {
+                        if (status != null && status.getState().isFinished()) {
+                            if (status.getOutputData().getString("resultado").equals("logOK")) {
+                                // Login correcto (existe un usuario con dichas credenciales asi que se inicia sesion)
+                                Intent mp = new Intent(getBaseContext(), MenuPrincipal.class);
+                                mp.putExtra("username", user);
+                                startActivity(mp);
+                                finish();
+                            } else {
+                                // Login incorrecto (no existe ningun usuario con dichas credenciales)
+                                int tiempo= Toast.LENGTH_SHORT;
+                                Toast aviso = Toast.makeText(getApplicationContext(), "Error / Campos incorrectos", tiempo);
+                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                                aviso.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(getApplicationContext()).enqueue(otwr);
+
+    }
 }

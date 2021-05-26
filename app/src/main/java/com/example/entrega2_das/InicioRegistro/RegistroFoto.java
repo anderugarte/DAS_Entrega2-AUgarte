@@ -195,15 +195,12 @@ public class RegistroFoto extends AppCompatActivity {
                                 mp.putExtra("username", username);
                                 startActivity(mp);
                                 finish();
-                                Log.i("AAAA","sigo");
                                 // Obtener el token del dispositivo y guardarlo en la BD
                                 FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
                                             @Override
                                             public void onComplete(@NonNull Task<String> task) {
-                                                Log.i("AAAA","dentro");
                                                 if (!task.isSuccessful()) {return;}
                                                 String token = task.getResult();
-                                                Log.i("AAAA","Token: " + token);
                                                 registrarToken(token);
                                             }
                                         });
