@@ -27,12 +27,13 @@ public class conexionTokenDBDAS extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/obtenerDatosBD.php";
+        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/subirTokenBD.php";
         String result = "";
         Data resultadosT = null;
         HttpURLConnection urlConnection = null;
 
         String username = getInputData().getString("username");
+        String token = getInputData().getString("token");
 
         try {
             URL destino = new URL(direccion);
@@ -44,6 +45,7 @@ public class conexionTokenDBDAS extends Worker {
 
             JSONObject params = new JSONObject();
             params.put("username",username);
+            params.put("token",token);
 
             urlConnection.setRequestProperty("Content-Type","application/json");
 
@@ -62,16 +64,12 @@ public class conexionTokenDBDAS extends Worker {
                 }
                 inputStream.close();
 
-                JSONParser parser = new JSONParser();
-                JSONObject json = (JSONObject) parser.parse(result);
-                String token = (String) json.get("token");
-
                 resultadosT = new Data.Builder()
                         .putString("token",token)
                         .build();
 
             }
-        } catch (IOException | ParseException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

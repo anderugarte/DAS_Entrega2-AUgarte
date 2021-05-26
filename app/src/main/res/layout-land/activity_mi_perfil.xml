@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvApe"
         app:layout_constraintTop_toBottomOf="@+id/tvApe"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0.129" />
 
     <TextView
         android:id="@+id/tvContrasenaBD"
@@ -94,10 +94,10 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/etCumpleBD"
-        app:layout_constraintHorizontal_bias="0.681"
+        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="@+id/tvApe"
         app:layout_constraintTop_toBottomOf="@+id/tvCumpleanos"
-        app:layout_constraintVertical_bias="0.226" />
+        app:layout_constraintVertical_bias="0.22" />
 
     <EditText
         android:id="@+id/etApellidosBD"
@@ -117,8 +117,8 @@
 
     <EditText
         android:id="@+id/etCumpleBD"
-        android:layout_width="125dp"
-        android:layout_height="48dp"
+        android:layout_width="128dp"
+        android:layout_height="39dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"

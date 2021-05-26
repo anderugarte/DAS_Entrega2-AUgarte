@@ -16,8 +16,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //import com.example.entrega2_das.DataBase.conexionDBDAS;
-//import com.example.entrega2_das.DataBase.registroDBDAS;
-//import com.example.entrega2_das.Principal.ClaseDialogoFecha;
+import com.example.entrega2_das.DataBase.registroDBDAS;
+import com.example.entrega2_das.Principal.ClaseDialogoFecha;
 //import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 
@@ -45,7 +45,7 @@ public class Registro extends AppCompatActivity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.ptCumple:
-                        //showDatePickerDialog(mostrarC);
+                        showDatePickerDialog(mostrarC);
                         break;
                 }
             }
@@ -82,7 +82,7 @@ public class Registro extends AppCompatActivity {
                         aviso.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 0);
                         aviso.show();
                     } else {
-                        //gestionarRegistro(n,a,u,p,d);
+                        gestionarRegistro(n,a,u,p,d);
                     }
                 }
 
@@ -105,51 +105,51 @@ public class Registro extends AppCompatActivity {
         return containsDigit;
     }
 
-//    private void gestionarRegistro(String no, String ap, String us, String pa, String da) {
-//
-//        Data resultadosR = new Data.Builder()
-//                .putString("username",us)
-//                .build();
-//
-//        OneTimeWorkRequest trabajoPuntualR = new OneTimeWorkRequest.Builder(registroDBDAS.class)
-//                .setInputData(resultadosR)
-//                .build();
-//
-//        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualR.getId())
-//                .observe(this, new Observer<WorkInfo>() {
-//                    @Override
-//                    public void onChanged(WorkInfo status) {
-//                        if (status != null && status.getState().isFinished()) {
-//                            if (status.getOutputData().getString("resultado").equals("true")) {
-//                                // Todos los campos son correctos asi que se traslada al usuario a la interfaz correspondiente a la foto de perfil
-//                                // Registro correcto (no existe ningun usuario con dicho username)
-//                                // Accedemos a la siguiente interfaz de Registro
-//                                Intent rf = new Intent (getBaseContext(), RegistroFoto.class);
-//                                rf.putExtra("username", us);
-//                                rf.putExtra("nombre",no);
-//                                rf.putExtra("apellidos",ap);
-//                                rf.putExtra("contrasena",pa);
-//                                rf.putExtra("cumple",da);
-//                                startActivity(rf);
-//                                finish();
-//                            } else {
-//                                // Registro incorrecto (existe un usuario con dicho username)
-//                                int tiempo= Toast.LENGTH_SHORT;
-//                                Toast aviso = Toast.makeText(getApplicationContext(), "Nombre de usuario ya en uso", tiempo);
-//                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
-//                                aviso.show();
-//                            }
-//                        }
-//                    }
-//                });
-//        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualR);
-//    }
-//
-//    // Este metodo nos ayuda a desplegar el dialogo para la seleccion de la fecha de nacimiento y nos permite enviar
-//    // el EditText por parametro para una vez obtenida la fecha poder realizar un .setText("fecha") en el
-//    private void showDatePickerDialog(final EditText editText) {
-//        ClaseDialogoFecha dialogoCumpleanos = new ClaseDialogoFecha(editText);
-//        dialogoCumpleanos.show(getSupportFragmentManager(),"cumple");
-//    }
+    private void gestionarRegistro(String no, String ap, String us, String pa, String da) {
+
+        Data resultadosR = new Data.Builder()
+                .putString("username",us)
+                .build();
+
+        OneTimeWorkRequest trabajoPuntualR = new OneTimeWorkRequest.Builder(registroDBDAS.class)
+                .setInputData(resultadosR)
+                .build();
+
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualR.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo status) {
+                        if (status != null && status.getState().isFinished()) {
+                            if (status.getOutputData().getString("resultado").equals("true")) {
+                                // Todos los campos son correctos asi que se traslada al usuario a la interfaz correspondiente a la foto de perfil
+                                // Registro correcto (no existe ningun usuario con dicho username)
+                                // Accedemos a la siguiente interfaz de Registro
+                                Intent rf = new Intent (getBaseContext(), RegistroFoto.class);
+                                rf.putExtra("username", us);
+                                rf.putExtra("nombre",no);
+                                rf.putExtra("apellidos",ap);
+                                rf.putExtra("contrasena",pa);
+                                rf.putExtra("cumple",da);
+                                startActivity(rf);
+                                finish();
+                            } else {
+                                // Registro incorrecto (existe un usuario con dicho username)
+                                int tiempo= Toast.LENGTH_SHORT;
+                                Toast aviso = Toast.makeText(getApplicationContext(), "Nombre de usuario ya en uso", tiempo);
+                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                                aviso.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualR);
+    }
+
+    // Este metodo nos ayuda a desplegar el dialogo para la seleccion de la fecha de nacimiento y nos permite enviar
+    // el EditText por parametro para una vez obtenida la fecha poder realizar un .setText("fecha") en el
+    private void showDatePickerDialog(final EditText editText) {
+        ClaseDialogoFecha dialogoCumpleanos = new ClaseDialogoFecha(editText);
+        dialogoCumpleanos.show(getSupportFragmentManager(),"cumple");
+    }
 
 }

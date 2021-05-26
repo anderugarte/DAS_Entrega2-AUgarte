@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -26,9 +27,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 //import com.example.entrega2_das.DataBase.conexionDBDAS;
-//import com.example.entrega2_das.DataBase.conexionTokenDBDAS;
-//import com.example.entrega2_das.DataBase.registroFotoDBDAS;
-//import com.example.entrega2_das.Principal.MenuPrincipal;
+import com.example.entrega2_das.DataBase.conexionTokenDBDAS;
+import com.example.entrega2_das.DataBase.registroFotoDBDAS;
+import com.example.entrega2_das.Principal.MenuPrincipal;
 import com.example.entrega2_das.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -115,7 +116,7 @@ public class RegistroFoto extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             // Crear cuenta sin foto de perfil
-                            //gestionarRegistroFoto(username, nom, ape, con, cum);
+                            gestionarRegistroFoto();
                         }
                     });
 
@@ -131,108 +132,107 @@ public class RegistroFoto extends AppCompatActivity {
 
                 } else {
                     // Crear cuenta con foto de perfil
-                    //gestionarRegistroFoto(username, nom, ape, con, cum);
+                    gestionarRegistroFoto();
                 }
             }
         });
     }
 
     // Metodo que gestionara el registro de un nuevo usuario
-//    private void gestionarRegistroFoto(String user, String nom, String ape, String con, String cum) {
-//
-//        // ------------------------ Almacenaje de la foto de perfil ------------------------ //
-//
-//        //Instancia de FireBase
-//        FirebaseStorage storage = FirebaseStorage.getInstance();
-//        // Crear una storage reference de nuestra app
-//        StorageReference storageRef = storage.getReference();
-//        // Crear una referencia a "fotoUser.jpg" siendo User el nombre de usuario
-//        String ref = "FotosPerfil/foto" + username + ".jpg";
-//        StorageReference fotoRef = storageRef.child(ref);
-//
-//        //Transformar el ImageView a bytes
-//        BitmapDrawable bitmapDrawablefto = (BitmapDrawable) fp.getDrawable();
-//        Bitmap bitmapFto = bitmapDrawablefto.getBitmap();
-//        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmapFto.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//        byte[] data = stream.toByteArray();
-//
-//        UploadTask uploadTask = fotoRef.putBytes(data);
-//        uploadTask.addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                // Hacer algo cuando ocurra un error en la subida
-//                int tiempo= Toast.LENGTH_SHORT;
-//                String texto = "Ha ocurrido un error al guardar la foto de perfil";
-//                Toast aviso = Toast.makeText(getApplicationContext(), texto, tiempo);
-//                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
-//                aviso.show();
-//            }
-//        });
-//
-//        // ------------------------ Registro del usuario ------------------------ //
-//
-//        Data resultadosRF = new Data.Builder()
-//                .putString("username",user)
-//                .putString("nombre",nom)
-//                .putString("apellidos",ape)
-//                .putString("password",con)
-//                .putString("cumpleanos",cum)
-//                .build();
-//
-//        OneTimeWorkRequest trabajoPuntualRF = new OneTimeWorkRequest.Builder(registroFotoDBDAS.class)
-//                .setInputData(resultadosRF).build();
-//
-//        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualRF.getId())
-//                .observe(this, new Observer<WorkInfo>() {
-//                    @Override
-//                    public void onChanged(WorkInfo status) {
-//                        if (status != null && status.getState().isFinished()) {
-//                            if (status.getOutputData().getString("resultado").equals("true")) {
-//                                // Registro correcto
-//                                // Almacenar la imagen en Firebase
-//                                Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
-//                                mp.putExtra("username", user);
-//                                startActivity(mp);
-//                                finish();
-//                                // Obtener el token del dispositivo y guardarlo en la BD
-//                                FirebaseMessaging.getInstance().getToken()
-//                                        .addOnCompleteListener(new OnCompleteListener<String>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<String> task) {
-//                                                if (!task.isSuccessful()) {
-//                                                    return;
-//                                                }
-//                                                String token = task.getResult();
-//                                                registrarToken(token);
-//                                            }
-//                                        });
-//                            } else {
-//                                // Registro incorrecto
-//                                int tiempo= Toast.LENGTH_SHORT;
-//                                Toast aviso = Toast.makeText(getApplicationContext(), "Error", tiempo);
-//                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
-//                                aviso.show();
-//                            }
-//                        }
-//                    }
-//                });
-//        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualRF);
-//
-//    }
+    private void gestionarRegistroFoto() {
 
-//    private void registrarToken(String token) {
-//
-//        Data datos = new Data.Builder()
-//                .putString("username",username)
-//                .putString("token",token).build();
-//
-//        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(conexionTokenDBDAS.class)
-//                .setInputData(datos).build();
-//
-//        WorkManager.getInstance(getApplicationContext()).enqueue(oneTimeWorkRequest);
-//
-//    }
+        // ------------------------ Almacenaje de la foto de perfil ------------------------ //
+
+        //Instancia de FireBase
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // Crear una storage reference de nuestra app
+        StorageReference storageRef = storage.getReference();
+        // Crear una referencia a "fotoUser.jpg" siendo User el nombre de usuario
+        String ref = "FotosPerfil/foto" + username + ".jpg";
+        StorageReference fotoRef = storageRef.child(ref);
+
+        //Transformar el ImageView a bytes
+        BitmapDrawable bitmapDrawablefto = (BitmapDrawable) fp.getDrawable();
+        Bitmap bitmapFto = bitmapDrawablefto.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmapFto.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] data = stream.toByteArray();
+
+        UploadTask uploadTask = fotoRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Hacer algo cuando ocurra un error en la subida
+                int tiempo= Toast.LENGTH_SHORT;
+                String texto = "Ha ocurrido un error al guardar la foto de perfil";
+                Toast aviso = Toast.makeText(getApplicationContext(), texto, tiempo);
+                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                aviso.show();
+            }
+        });
+
+        // ------------------------ Registro del usuario ------------------------ //
+
+        Data resultadosRF = new Data.Builder()
+                .putString("username",username)
+                .putString("nombre",nom)
+                .putString("apellidos",ape)
+                .putString("password",con)
+                .putString("cumpleanos",cum)
+                .build();
+
+        OneTimeWorkRequest trabajoPuntualRF = new OneTimeWorkRequest.Builder(registroFotoDBDAS.class)
+                .setInputData(resultadosRF).build();
+
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(trabajoPuntualRF.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo status) {
+                        if (status != null && status.getState().isFinished()) {
+                            if (status.getOutputData().getString("resultado").equals("true")) {
+                                // Registro correcto
+                                Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
+                                mp.putExtra("username", username);
+                                startActivity(mp);
+                                finish();
+                                Log.i("AAAA","sigo");
+                                // Obtener el token del dispositivo y guardarlo en la BD
+                                FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<String> task) {
+                                                Log.i("AAAA","dentro");
+                                                if (!task.isSuccessful()) {return;}
+                                                String token = task.getResult();
+                                                Log.i("AAAA","Token: " + token);
+                                                registrarToken(token);
+                                            }
+                                        });
+                            } else {
+                                // Registro incorrecto
+                                int tiempo= Toast.LENGTH_SHORT;
+                                Toast aviso = Toast.makeText(getApplicationContext(), "Error", tiempo);
+                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                                aviso.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(getApplicationContext()).enqueue(trabajoPuntualRF);
+
+    }
+
+    private void registrarToken(String token) {
+
+        Data datos = new Data.Builder()
+                .putString("username",username)
+                .putString("token",token).build();
+
+        OneTimeWorkRequest oneTimeWorkRequest = new OneTimeWorkRequest.Builder(conexionTokenDBDAS.class)
+                .setInputData(datos).build();
+
+        WorkManager.getInstance(getApplicationContext()).enqueue(oneTimeWorkRequest);
+
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -247,14 +247,7 @@ public class RegistroFoto extends AppCompatActivity {
             String nombrefichero = "IMG_" + timeStamp + "_";
             File imagenFich = new File(eldirectorio, nombrefichero + ".jpg");
             OutputStream os;
-//            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//            laminiatura.compress(Bitmap.CompressFormat.PNG, 100, stream);
-//            byte[] fototransformada = stream.toByteArray();
-//            String fotoen64 = Base64.encodeToString(fototransformada,Base64.DEFAULT);
-//            Uri.Builder builder = new Uri.Builder()
-//                    .appendQueryParameter("identificador", username)
-//                    .appendQueryParameter("imagen", fotoen64);
-//            String parametrosURL = builder.build().getEncodedQuery();
+
             try {
                 fp.setImageBitmap(laminiatura);
                 os = new FileOutputStream(imagenFich);

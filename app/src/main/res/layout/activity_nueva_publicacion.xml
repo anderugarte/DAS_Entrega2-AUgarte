@@ -20,40 +20,6 @@
         tools:srcCompat="@drawable/landscape" />
 
     <Button
-        android:id="@+id/bCamara"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:fontFamily="@font/allerta_stencil"
-        android:text="Sacar foto"
-        android:textColor="#FF9800"
-        android:textSize="10sp"
-        app:icon="@android:drawable/ic_menu_camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.204"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/foto"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/bPublicar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:fontFamily="@font/allerta_stencil"
-        android:text="Publicar"
-        android:textColor="#FF9800"
-        android:textSize="12sp"
-        app:icon="@android:drawable/ic_menu_upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bUbicacion"
-        app:layout_constraintVertical_bias="0.076" />
-
-    <Button
         android:id="@+id/bUbicacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,10 +31,21 @@
         app:icon="@android:drawable/ic_menu_myplaces"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.553"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bGaleria"
-        app:layout_constraintVertical_bias="0.041" />
+        app:layout_constraintVertical_bias="0.042" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bUbicacion"
+        app:layout_constraintEnd_toStartOf="@+id/bUbicacion"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bUbicacion"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
 
     <Button
         android:id="@+id/bGaleria"
@@ -81,9 +58,77 @@
         android:textSize="10sp"
         app:icon="@android:drawable/ic_menu_gallery"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintEnd_toEndOf="@+id/foto"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/bCamara"
         app:layout_constraintTop_toBottomOf="@+id/foto"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bCamara"
+        app:layout_constraintEnd_toStartOf="@+id/bCamara"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/foto"
+        app:layout_constraintTop_toTopOf="@+id/bCamara"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <Button
+        android:id="@+id/bCamara"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:text="Sacar foto"
+        android:textColor="#FF9800"
+        android:textSize="10sp"
+        app:icon="@android:drawable/ic_menu_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintStart_toStartOf="@+id/foto"
+        app:layout_constraintTop_toBottomOf="@+id/foto"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bGaleria"
+        app:layout_constraintEnd_toEndOf="@+id/foto"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/bGaleria"
+        app:layout_constraintTop_toTopOf="@+id/bGaleria"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bPublicar"
+        app:layout_constraintEnd_toStartOf="@+id/bPublicar"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bPublicar"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <Button
+        android:id="@+id/bPublicar"
+        android:layout_width="91dp"
+        android:layout_height="46dp"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:text="Publicar"
+        android:textColor="#FF9800"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bUbicacion"
+        app:layout_constraintVertical_bias="0.075" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

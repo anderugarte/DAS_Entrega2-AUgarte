@@ -27,6 +27,7 @@ public class registroDBDAS extends Worker {
     @NonNull
     @Override
     public Result doWork() {
+
         String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/registroBD.php";
         String result = "";
         Data resultadosR = null;

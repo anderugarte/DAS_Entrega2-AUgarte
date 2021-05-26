@@ -8,6 +8,74 @@
     tools:context=".Principal.NuevaPublicacion">
 
     <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bCamara"
+        app:layout_constraintEnd_toStartOf="@+id/bCamara"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/foto"
+        app:layout_constraintTop_toTopOf="@+id/bCamara"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bUbicacion"
+        app:layout_constraintEnd_toStartOf="@+id/bUbicacion"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bUbicacion"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+    <Button
+        android:id="@+id/bUbicacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:text="Ubicación"
+        android:textColor="#FF9800"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_myplaces"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bGaleria"
+        app:layout_constraintHorizontal_bias="0.613"
+        app:layout_constraintStart_toStartOf="@+id/bCamara"
+        app:layout_constraintTop_toBottomOf="@+id/bGaleria"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <Button
+        android:id="@+id/bPublicar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:text="Publicar"
+        android:textColor="#FF9800"
+        android:textSize="12sp"
+        app:icon="@android:drawable/ic_menu_upload"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bUbicacion"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="@+id/bUbicacion"
+        app:layout_constraintTop_toBottomOf="@+id/bUbicacion"
+        app:layout_constraintVertical_bias="0.068" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bPublicar"
+        app:layout_constraintEnd_toStartOf="@+id/bPublicar"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bPublicar"
+        app:layout_constraintVertical_bias="0.562"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <ImageView
         android:id="@+id/foto"
         android:layout_width="258dp"
         android:layout_height="349dp"
@@ -36,40 +104,6 @@
         app:layout_constraintVertical_bias="0.322" />
 
     <Button
-        android:id="@+id/bUbicacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:fontFamily="@font/allerta_stencil"
-        android:text="Ubicación"
-        android:textColor="#FF9800"
-        android:textSize="12sp"
-        app:icon="@android:drawable/ic_menu_myplaces"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/bGaleria"
-        app:layout_constraintHorizontal_bias="0.508"
-        app:layout_constraintStart_toStartOf="@+id/bCamara"
-        app:layout_constraintTop_toBottomOf="@+id/bGaleria"
-        app:layout_constraintVertical_bias="0.171" />
-
-    <Button
-        android:id="@+id/bPublicar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#000000"
-        android:fontFamily="@font/allerta_stencil"
-        android:text="Publicar"
-        android:textColor="#FF9800"
-        android:textSize="12sp"
-        app:icon="@android:drawable/ic_menu_upload"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/bUbicacion"
-        app:layout_constraintHorizontal_bias="0.723"
-        app:layout_constraintStart_toStartOf="@+id/bUbicacion"
-        app:layout_constraintTop_toBottomOf="@+id/bUbicacion"
-        app:layout_constraintVertical_bias="0.072" />
-
-    <Button
         android:id="@+id/bGaleria"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -81,8 +115,19 @@
         app:icon="@android:drawable/ic_menu_gallery"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintHorizontal_bias="0.106"
         app:layout_constraintStart_toEndOf="@+id/bCamara"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.322" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/bGaleria"
+        app:layout_constraintEnd_toEndOf="@+id/foto"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/bGaleria"
+        app:layout_constraintTop_toTopOf="@+id/bGaleria"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
 </androidx.constraintlayout.widget.ConstraintLayout>
