@@ -1,11 +1,18 @@
 package com.example.entrega2_das.Principal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,8 +22,15 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.entrega2_das.DataBase.numPublicacionesDBDAS;
+import com.example.entrega2_das.DataBase.registroFotoDBDAS;
 import com.example.entrega2_das.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -31,6 +45,7 @@ public class NuevaPublicacion extends AppCompatActivity {
     private AlertDialog.Builder alertDialogBuilder;
     private Context context;
     private String usuarioN;
+    int n = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +118,7 @@ public class NuevaPublicacion extends AppCompatActivity {
                     }
                 } else {
                     // Anadimos la nueva publicación al foro
+                    anadirPublicacion(usuarioN);
 
                     Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
                     startActivity(mp);
@@ -112,6 +128,77 @@ public class NuevaPublicacion extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void anadirPublicacion(String usuar) {
+
+        // ------------------------ Almacenaje de la foto de perfil ------------------------ //
+
+        // Obtener numero de publicaciones del usuario
+        int num = obtenerNumPublicaciones();
+
+        //Instancia de FireBase
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        // Crear una storage reference de nuestra app
+        StorageReference storageRef = storage.getReference();
+        // Crear una referencia a "fotoUser.jpg" siendo User el nombre de usuario
+        String ref = "Publicaciones/foto" + usuar + "_" + num + ".jpg"; // Gestionar varias publicaciones
+        StorageReference fotoRef = storageRef.child(ref);
+
+        //Transformar el ImageView a bytes
+        BitmapDrawable bitmapDrawablefto = (BitmapDrawable) foto.getDrawable();
+        Bitmap bitmapFto = bitmapDrawablefto.getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmapFto.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] data = stream.toByteArray();
+
+        UploadTask uploadTask = fotoRef.putBytes(data);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Hacer algo cuando ocurra un error en la subida
+                int tiempo= Toast.LENGTH_SHORT;
+                String texto = "Ha ocurrido un error al guardar la publicación";
+                Toast aviso = Toast.makeText(getApplicationContext(), texto, tiempo);
+                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                aviso.show();
+            }
+        });
+
+    }
+
+    private int obtenerNumPublicaciones() {
+
+        Data resultadosRF = new Data.Builder()
+                .putString("username",usuarioN)
+                .build();
+
+        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(numPublicacionesDBDAS.class)
+                .setInputData(resultadosRF).build();
+
+        WorkManager.getInstance(getApplicationContext()).getWorkInfoByIdLiveData(otwr.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo status) {
+                        if (status != null && status.getState().isFinished()) {
+                            if (status.getOutputData().getString("resultado").equals("true")) {
+
+                                // Se obtienen los datos del usuario
+                                n = status.getOutputData().getInt("numP",0);
+
+                            } else {
+                                // Registro incorrecto
+                                int tiempo= Toast.LENGTH_SHORT;
+                                Toast aviso = Toast.makeText(getApplicationContext(), "Error", tiempo);
+                                aviso.setGravity(Gravity.BOTTOM| Gravity.CENTER, 0, 0);
+                                aviso.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(getApplicationContext()).enqueue(otwr);
+
+        return n;
     }
 
     @Override
@@ -148,6 +235,7 @@ public class NuevaPublicacion extends AppCompatActivity {
 
     }
 
+    // Gestiona la acciona cuando el usuario pulsa el boton 'Atras' de su dispositivo
     @Override
     public void onBackPressed(){
         alertDialogBuilder = new AlertDialog.Builder(this);

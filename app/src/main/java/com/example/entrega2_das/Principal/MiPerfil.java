@@ -12,9 +12,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.entrega2_das.DataBase.conexionDBDAS;
 import com.example.entrega2_das.DataBase.obtenerDatosDBDAS;
 import com.example.entrega2_das.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -34,9 +31,6 @@ import com.google.firebase.storage.StorageReference;
 public class MiPerfil extends AppCompatActivity {
 
     private String usuName;
-    private String nBD;
-    private String aBD;
-    private String cBD;
 
     ImageView fpe;
     EditText nombreBD, apellidosBD, cumpleBD;
@@ -51,7 +45,7 @@ public class MiPerfil extends AppCompatActivity {
         nomUsu = (TextView) findViewById(R.id.tvNUsuBD);
         nombreBD = (EditText) findViewById(R.id.etNombreBD);
         apellidosBD = (EditText) findViewById(R.id.etApellidosBD);
-        contrasenaBD = (TextView) findViewById(R.id.etContrasenaBD);
+        contrasenaBD = (TextView) findViewById(R.id.tvContrasenaBD);
         cumpleBD = (EditText) findViewById(R.id.etCumpleBD);
         fpe = (ImageView) findViewById(R.id.imageView);
 
@@ -63,9 +57,9 @@ public class MiPerfil extends AppCompatActivity {
 
         // Escribimos el nombre de usuario
         nomUsu.setText(usuName);
-        
+
         // Recogemos los datos del usuario
-        recogerDatos(usuName);
+        recogerDatos();
 
         // Boton cancelar
         bCa.setOnClickListener(new View.OnClickListener() {
@@ -87,7 +81,7 @@ public class MiPerfil extends AppCompatActivity {
         });
     }
 
-    private void recogerDatos(String usuName) {
+    private void recogerDatos() {
 
         // ------------------------ Descarga de la foto de perfil ------------------------ //
 
@@ -135,9 +129,9 @@ public class MiPerfil extends AppCompatActivity {
                     public void onChanged(WorkInfo status) {
                         if (status != null && status.getState().isFinished()) {
                             // Se obtienen los datos del usuario
-                            nBD = status.getOutputData().getString("nom");
-                            aBD = status.getOutputData().getString("ape");
-                            cBD = status.getOutputData().getString("cum");
+                            String nBD = status.getOutputData().getString("nom");
+                            String aBD = status.getOutputData().getString("ape");
+                            String cBD = status.getOutputData().getString("cum");
 
                             // Escribimos los datos del usuario
                             nombreBD.setText(nBD);
@@ -147,6 +141,15 @@ public class MiPerfil extends AppCompatActivity {
                     }
                 });
         WorkManager.getInstance(getApplicationContext()).enqueue(otwr);
+    }
+
+    // Cuando el usuario pulse el boton "Atras" de su dispositivo movil
+    @Override
+    public void onBackPressed(){
+        Intent mp = new Intent (getBaseContext(), MenuPrincipal.class);
+        mp.putExtra("usename",usuName);
+        startActivity(mp);
+        finish();
     }
 
 }

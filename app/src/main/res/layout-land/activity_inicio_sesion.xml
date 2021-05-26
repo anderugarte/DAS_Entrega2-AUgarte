@@ -106,7 +106,7 @@
         android:layout_height="51dp"
         android:fontFamily="@font/monofett"
         android:text="WIT?"
-        android:textColor="#9C6D48"
+        android:textColor="#000000"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/bRegis"

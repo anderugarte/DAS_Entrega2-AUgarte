@@ -5,14 +5,14 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
 
-    <uses-feature
-        android:name="android.hardware.camera2.full"
-        android:required="true" />
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
+<!--    <uses-feature-->
+<!--        android:name="android.hardware.camera2.full"-->
+<!--        android:required="true" />-->
+<!--    <uses-feature-->
+<!--        android:name="android.hardware.camera"-->
+<!--        android:required="true" />-->
 
     <application
         android:allowBackup="true"
@@ -38,10 +38,16 @@
             android:theme="@style/ThemeRegistro"/>
         <activity
             android:name=".InicioRegistro.InicioSesion"
-            android:theme="@style/ThemeInicioSesion"/>
+            android:theme="@style/ThemeInicioSesion"
+            android:parentActivityName=".Principal.MainActivity">
+            <intent-filter>
+                <action android:name="AVISO" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Principal.MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/ThemeMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -58,15 +64,15 @@
             </intent-filter>
         </service>
 
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@mipmap/ic_wit_round" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/white" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="canal por defecto" />
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_icon"-->
+<!--            android:resource="@mipmap/ic_wit_round" />-->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_color"-->
+<!--            android:resource="@color/white" />-->
+<!--        <meta-data-->
+<!--            android:name="com.google.firebase.messaging.default_notification_channel_id"-->
+<!--            android:value="canal por defecto" />-->
 
         <meta-data
             android:name="preloaded_fonts"

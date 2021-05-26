@@ -63,6 +63,8 @@ public class MenuPrincipal extends AppCompatActivity {
         bAc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                obtenerPublicacion(nomUsu);
+
                 Intent mp = new Intent (context, MenuPrincipal.class);
                 startActivity(mp);
                 finish();
@@ -70,7 +72,10 @@ public class MenuPrincipal extends AppCompatActivity {
         });
     }
 
-    // Gestiona la acciona cuando el usuario pulsa el boton 'Atras' de su dispositivo
+    private void obtenerPublicacion(String nomUsu) {
+    }
+
+    // Gestiona la accion cuando el usuario pulsa el boton 'Atras' de su dispositivo
     @Override
     public void onBackPressed(){
         alertDialogBuilder = new AlertDialog.Builder(this);

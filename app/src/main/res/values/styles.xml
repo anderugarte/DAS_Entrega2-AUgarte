@@ -7,9 +7,9 @@
         <item name="colorAccent">@android:color/black</item>
     </style>
 
-    <!--Thema de MainActivity-->
+    <!--Thema de MainActivity #598FED-->
     <style name="ThemeMainActivity" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">#598FED</item>
+        <item name="colorPrimary">@android:color/holo_orange_dark</item>
         <item name="colorPrimaryDark">#002AAC</item>
         <item name="colorAccent">@android:color/black</item>
     </style>

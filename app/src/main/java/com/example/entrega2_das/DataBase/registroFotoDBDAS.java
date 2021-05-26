@@ -27,16 +27,16 @@ public class registroFotoDBDAS extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/registroFotoBD.php";
-        String result = "";
-        Data resultadosRF = null;
-        HttpURLConnection urlConnection = null;
-
         String username = getInputData().getString("username");
         String nombre = getInputData().getString("nombre");
         String apellidos = getInputData().getString("apellidos");
         String password = getInputData().getString("password");
         String cumpleanos = getInputData().getString("cumpleanos");
+
+        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/registroFotoBD.php";
+        String result = "";
+        Data resultadosRF = null;
+        HttpURLConnection urlConnection = null;
 
         try {
             URL destino = new URL(direccion);
@@ -73,8 +73,7 @@ public class registroFotoDBDAS extends Worker {
                 resultadosRF = new Data.Builder().putString("resultado",result).build();
 
             }
-        } catch (MalformedURLException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();}
-        urlConnection.disconnect();
+        } catch (IOException e) {e.printStackTrace();}
 
         return Result.success(resultadosRF);
     }

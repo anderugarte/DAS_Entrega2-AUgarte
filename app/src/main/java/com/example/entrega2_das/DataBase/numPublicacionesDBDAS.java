@@ -15,21 +15,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
-public class registroDBDAS extends Worker {
+public class numPublicacionesDBDAS extends Worker {
 
-    public registroDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+    public numPublicacionesDBDAS(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
     }
 
     @NonNull
     @Override
     public Result doWork() {
-        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/registroBD.php";
+
+        String direccion = "http://ec2-54-242-79-204.compute-1.amazonaws.com/augarte059/WEB/numPublicacionesBD.php";
         String result = "";
-        Data resultadosR = null;
+        Data resultadosNP = null;
         HttpURLConnection urlConnection = null;
 
         String username = getInputData().getString("username");
@@ -62,13 +62,13 @@ public class registroDBDAS extends Worker {
                 }
                 inputStream.close();
 
-                resultadosR = new Data.Builder()
+                resultadosNP = new Data.Builder()
                         .putString("resultado",result)
                         .build();
 
             }
         } catch (IOException e) {e.printStackTrace();}
 
-        return Result.success(resultadosR);
+        return Result.success(resultadosNP);
     }
 }

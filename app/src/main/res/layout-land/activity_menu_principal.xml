@@ -9,40 +9,25 @@
 
     <TextView
         android:id="@+id/tvUser"
-        android:layout_width="189dp"
-        android:layout_height="26dp"
+        android:layout_width="126dp"
+        android:layout_height="27dp"
         android:background="#000000"
         android:fontFamily="@font/allerta_stencil"
         android:gravity="center|right"
         android:text="Username"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.289"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgFeed"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/tvUbi"
-        android:layout_width="189dp"
-        android:layout_height="26dp"
-        android:background="#000000"
-        android:fontFamily="@font/allerta_stencil"
-        android:gravity="center|left"
-        android:text="Ubicación"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintEnd_toEndOf="@+id/imgFeed"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgFeed"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/bAc"
-        android:layout_width="138dp"
-        android:layout_height="59dp"
+        android:layout_width="122dp"
+        android:layout_height="32dp"
+        android:background="#FFFFFF"
         android:backgroundTint="#000000"
         android:fontFamily="@font/monofett"
         android:gravity="center"
@@ -50,28 +35,11 @@
         android:textColor="#FF9800"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toEndOf="@+id/imgFeed"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.153" />
-
-    <Button
-        android:id="@+id/bMP"
-        android:layout_width="138dp"
-        android:layout_height="59dp"
-        android:backgroundTint="#000000"
-        android:fontFamily="@font/monofett"
-        android:gravity="center"
-        android:text="Mi Perfil"
-        android:textColor="#FF9800"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toEndOf="@+id/imgFeed"
-        app:layout_constraintTop_toBottomOf="@+id/bNP"
-        app:layout_constraintVertical_bias="0.213" />
+        app:layout_constraintEnd_toStartOf="@+id/tvUser"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvUbi"
+        app:layout_constraintTop_toBottomOf="@+id/imgFeed"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/bNP"
@@ -85,21 +53,54 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toEndOf="@+id/imgFeed"
-        app:layout_constraintTop_toBottomOf="@+id/bAc"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335" />
+
+    <Button
+        android:id="@+id/bMP"
+        android:layout_width="138dp"
+        android:layout_height="59dp"
+        android:backgroundTint="#000000"
+        android:fontFamily="@font/monofett"
+        android:gravity="center"
+        android:text="Mi Perfil"
+        android:textColor="#FF9800"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bNP"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="@+id/bNP"
+        app:layout_constraintTop_toBottomOf="@+id/bNP"
+        app:layout_constraintVertical_bias="0.32" />
 
     <ImageView
         android:id="@+id/imgFeed"
-        android:layout_width="327dp"
-        android:layout_height="255dp"
+        android:layout_width="360dp"
+        android:layout_height="338dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.11"
+        app:layout_constraintVertical_bias="0.219"
         app:srcCompat="@drawable/landscape" />
+
+    <TextView
+        android:id="@+id/tvUbi"
+        android:layout_width="112dp"
+        android:layout_height="25dp"
+        android:background="#000000"
+        android:fontFamily="@font/allerta_stencil"
+        android:gravity="center|left"
+        android:text="Ubicación"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/imgFeed"
+        app:layout_constraintTop_toBottomOf="@+id/imgFeed"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

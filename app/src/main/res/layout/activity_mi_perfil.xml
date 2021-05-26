@@ -8,25 +8,25 @@
     tools:context=".Principal.MiPerfil">
 
     <TextView
-        android:id="@+id/etContrasenaBD"
+        android:id="@+id/tvContrasenaBD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/allerta_stencil"
         android:clickable="true"
+        android:fontFamily="@font/allerta_stencil"
         android:text="¿Deseas cambiar tu contraseña?"
         android:textColor="#03A9F4"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/etCumpleBD"
-        app:layout_constraintHorizontal_bias="0.525"
+        app:layout_constraintHorizontal_bias="0.653"
         app:layout_constraintStart_toStartOf="@+id/tvApe"
         app:layout_constraintTop_toBottomOf="@+id/tvCumpleanos"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.193" />
 
     <TextView
         android:id="@+id/tvNUsuBD"
         android:layout_width="128dp"
-        android:layout_height="21dp"
+        android:layout_height="30dp"
         android:fontFamily="@font/allerta_stencil"
         android:textColor="#FFFFFF"
         android:textSize="18sp"
@@ -39,8 +39,8 @@
 
     <EditText
         android:id="@+id/etNombreBD"
-        android:layout_width="123dp"
-        android:layout_height="26dp"
+        android:layout_width="128dp"
+        android:layout_height="36dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:gravity="bottom|left"
@@ -72,8 +72,8 @@
 
     <EditText
         android:id="@+id/etApellidosBD"
-        android:layout_width="124dp"
-        android:layout_height="26dp"
+        android:layout_width="127dp"
+        android:layout_height="38dp"
         android:ems="10"
         android:fontFamily="@font/allerta_stencil"
         android:inputType="textPersonName"
@@ -113,7 +113,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvApe"
         app:layout_constraintTop_toBottomOf="@+id/tvApe"
-        app:layout_constraintVertical_bias="0.055" />
+        app:layout_constraintVertical_bias="0.087" />
 
     <TextView
         android:id="@+id/tvApe"
@@ -128,7 +128,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvNom"
         app:layout_constraintTop_toBottomOf="@+id/tvNom"
-        app:layout_constraintVertical_bias="0.043" />
+        app:layout_constraintVertical_bias="0.067" />
 
     <TextView
         android:id="@+id/tvNom"
@@ -143,7 +143,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/tvNUsu"
         app:layout_constraintTop_toBottomOf="@+id/tvNUsu"
-        app:layout_constraintVertical_bias="0.051" />
+        app:layout_constraintVertical_bias="0.076" />
 
     <TextView
         android:id="@+id/tvNUsu"

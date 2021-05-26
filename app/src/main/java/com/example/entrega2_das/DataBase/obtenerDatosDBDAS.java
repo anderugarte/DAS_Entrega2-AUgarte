@@ -71,6 +71,9 @@ public class obtenerDatosDBDAS extends Worker {
                 String apellidos = (String)json.get("apellidos");
                 String cumpleanos = (String) json.get("cumpleanos");
 
+                String[] c = cumpleanos.split("-");
+                cumpleanos = c[2] + " / " + c[1] + " / " + c[0];
+
                 resultadosOD = new Data.Builder()
                         .putString("nom",nombre)
                         .putString("ape",apellidos)
@@ -78,10 +81,9 @@ public class obtenerDatosDBDAS extends Worker {
                         .build();
 
             }
-        } catch (MalformedURLException e) {e.printStackTrace();} catch (IOException e) {e.printStackTrace();} catch (ParseException e) {
+        } catch (IOException | ParseException e) {
             e.printStackTrace();
         }
-        urlConnection.disconnect();
 
         return Result.success(resultadosOD);
     }
