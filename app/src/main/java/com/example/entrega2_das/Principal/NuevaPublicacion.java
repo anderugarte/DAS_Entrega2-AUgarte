@@ -245,6 +245,7 @@ public class NuevaPublicacion extends AppCompatActivity {
                 .setPositiveButton("Descartar", (dialog, which) -> {
                     // Descartar la nueva publicacion
                     Intent mp = new Intent(context, MenuPrincipal.class);
+                    mp.putExtra("usename",usuarioN);
                     mp.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(mp);
                     finish();
